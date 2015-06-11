@@ -18,25 +18,43 @@
 using namespace std;
 
 State cap, goal, initial;
-queue q;
+queue<State> q;
 bool visited[][];
 
 void start_bfs(){
 	//Create a new initial state
+	initial = State();
 	//Create a goal state.
+	goal = State();
 	//Create a capacities state
+	cap = State();
+
+	q.push(initial);
+	while (!q.empty()) {
+		createAdjacencies(q.front());
+		q.pop();
+	}
 }
 
-void bfs(State curr){
+vector<State> findPath(State &child){
+	vector<State> optimalPath;
+	while(child!=initial){
+		optimalPath.push_back(child);
+		//This might not work well because we want to change the reference to child
+		//not the contents of child.
+		*child = child.parent();
+	}
+	reverse(optimalPath.start(),optimalPath.end());
+}
+
+void createAdjacencies(State &curr){
 	int a=curr.a(),b = curr.b(), c= curr.c();
 	//C->A
 	if( c!=0 && a!=cap.a()){
-		int amtMoved = min(c, (cap.a()-a);
-		if(!visited[a+amtMoved][b]){
-			new State(a+amtMoved,b,c-amtMoved, curr);
-		}
+		int amtMoved = min(c, (cap.a()-a));
+		if(!visited[a+amtMoved][b])
+			q.push(new State(a+amtMoved,b,c-amtMoved, curr));
 	}
-		createState();
 }
 
 int main(int argc, char * const argv[]){
