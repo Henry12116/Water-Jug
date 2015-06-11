@@ -36,6 +36,7 @@ void start_bfs() {
 	}
 }
 
+//this is a commit
 vector<State> findPath(State &child) {
 	vector<State> optimalPath;
 	while (child != initial) {
