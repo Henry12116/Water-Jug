@@ -30,6 +30,10 @@ public:
 		return c_;
 	}
 
+	State parent(){
+		return parent_;
+	}
+
 	string to_string() const {
 		return "(" + a_ + ", " + b_ + ", " + c_ + ")";
 	}
