@@ -38,3 +38,10 @@ void bfs(State curr){
 	}
 		createState();
 }
+
+int main(int argc, char * const argv[]){
+	if (argc != 6){
+		cout << "Usage: ./waterjugpuzzle <cap A> <cap B> <cap C> <goal A> <goal B> <goal C>" << endl;
+	}
+
+}
