@@ -68,34 +68,34 @@ void createAdjacencies(State &curr) {
 	}
 	
 	//C->B
-	if (c != 0 && a != cap.a()) {
-		int amtMoved = min(c, (cap.a() - a));
+	if (c != 0 && b != cap.b()) {
+		int amtMoved = min(c, (cap.b() - b));
 		if (!visited[a + amtMoved][b])
 			q.push(new State(a, b + amtMoved, c - amtMoved, curr));
 			//TODO: Update visited to true
 	}
 	
 	//A->B
-	if (c != 0 && a != cap.a()) {
-		int amtMoved = min(c, (cap.a() - a));
+	if (a != 0 && b != cap.b()) {
+		int amtMoved = min(a, (cap.b() - b));
 		if (!visited[a + amtMoved][b])
-			q.push(new State(a - amtMoved, b, c - amtMoved, curr));
+			q.push(new State(a - amtMoved, b + amtMoved, c, curr));
 			//TODO: Update visited to true
 	}
 	
 	//B->C
-	if (c != 0 && a != cap.a()) {
-		int amtMoved = min(c, (cap.a() - a));
+	if (b != 0 && c != cap.c()) {
+		int amtMoved = min(b, (cap.c() - c));
 		if (!visited[a + amtMoved][b])
-			q.push(new State(a + amtMoved, b, c - amtMoved, curr));
+			q.push(new State(a, b - amtMoved, c + amtMoved, curr));
 			//TODO: Update visited to true
 	}
 	
 	//A->C
-	if (c != 0 && a != cap.a()) {
-		int amtMoved = min(c, (cap.a() - a));
+	if (a != 0 && c != cap.c()) {
+		int amtMoved = min(a, (cap.c() - c));
 		if (!visited[a + amtMoved][b])
-			q.push(new State(a + amtMoved, b, c - amtMoved, curr));
+			q.push(new State(a - amtMoved, b, c + amtMoved, curr));
 			//TODO: Update visited to true
 	}
 }
@@ -127,8 +127,7 @@ int main(int argc, char * const argv[]) {
 
 	//Check that sum of goal state is equal to capacity of C
 	if (input[3] < (input[4] + input[5] + input[6])) {
-		cerr
-				<< "Error: Total gallons in goal state must be equal to the capacity of jug C."
+		cerr << "Error: Total gallons in goal state must be equal to the capacity of jug C."
 	}
 
 	return 1;
