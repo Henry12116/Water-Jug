@@ -52,6 +52,16 @@ void createAdjacencies(State &curr) {
 	//TODO: Possibly set capacity for visited && fill visited with false
 	int a = curr.a(), b = curr.b(), c = curr.c();
 	//C->A
+	visited[][] = new boolean[cap.a()][cap.b];
+	//gives the outer array a size of the capacity of a and the inner array the capacity size of b
+	for (int i = 0; i < visited.length; i++)
+	{
+		for (int j = 0; j < visited[i].length; j++)
+		{
+			visited[i][j] = false;
+		}
+	}
+	// fills each index with false.. slow run time...
 	if (c != 0 && a != cap.a()) {
 		int amtMoved = min(c, (cap.a() - a));
 		if (!visited[a + amtMoved][b])
