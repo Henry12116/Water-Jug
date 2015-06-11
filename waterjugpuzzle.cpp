@@ -12,9 +12,14 @@
 #include <algorithm>
 #include <sstream>
 #include <iomanip>
+#include <queue>
 #include "State.cpp"
 
 using namespace std;
+
+State cap, goal, initial;
+queue q;
+bool visited[][];
 
 void start_bfs(){
 	//Create a new initial state
@@ -23,7 +28,13 @@ void start_bfs(){
 }
 
 void bfs(State curr){
+	int a=curr.a(),b = curr.b(), c= curr.c();
 	//C->A
-	if(curr.c()!=0 && curr.a()!=cap.a())
-		fill
+	if( c!=0 && a!=cap.a()){
+		int amtMoved = min(c, (cap.a()-a);
+		if(!visited[a+amtMoved][b]){
+			new State(a+amtMoved,b,c-amtMoved, curr);
+		}
+	}
+		createState();
 }

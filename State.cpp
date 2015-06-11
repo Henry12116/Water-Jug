@@ -17,7 +17,7 @@ using namespace std;
 
 class State {
 public:
-	State(int a, int b, int c, State *p) :
+	State(int a, int b, int c, State &p) :
 			a_(a), b_(b), c_(c), parent_(p) {
 	}
 	int a() {
