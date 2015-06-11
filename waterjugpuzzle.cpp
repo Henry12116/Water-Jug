@@ -21,7 +21,7 @@ State cap, goal, initial;
 queue<State> q;
 bool visited[][];
 
-void start_bfs(){
+void start_bfs() {
 	//Create a new initial state
 	initial = State();
 	//Create a goal state.
@@ -36,53 +36,56 @@ void start_bfs(){
 	}
 }
 
-vector<State> findPath(State &child){
+vector<State> findPath(State &child) {
 	vector<State> optimalPath;
-	while(child!=initial){
+	while (child != initial) {
 		optimalPath.push_back(child);
 		//This might not work well because we want to change the reference to child
 		//not the contents of child.
 		*child = child.parent();
 	}
-	reverse(optimalPath.start(),optimalPath.end());
+	reverse(optimalPath.start(), optimalPath.end());
 }
 
-void createAdjacencies(State &curr){
-	int a=curr.a(),b = curr.b(), c= curr.c();
+void createAdjacencies(State &curr) {
+	int a = curr.a(), b = curr.b(), c = curr.c();
 	//C->A
-	if( c!=0 && a!=cap.a()){
-		int amtMoved = min(c, (cap.a()-a));
-		if(!visited[a+amtMoved][b])
-			q.push(new State(a+amtMoved,b,c-amtMoved, curr));
+	if (c != 0 && a != cap.a()) {
+		int amtMoved = min(c, (cap.a() - a));
+		if (!visited[a + amtMoved][b])
+			q.push(new State(a + amtMoved, b, c - amtMoved, curr));
 	}
 }
 
-int main(int argc, char * const argv[]){
+int main(int argc, char * const argv[]) {
 	//Error check for correct number of arguments
-	if (argc != 6){
+	if (argc != 7) {
 		cout << "Usage: ./waterjugpuzzle <cap A> <cap B> <cap C> <goal A> <goal B> <goal C>" << endl;
 	}
 
-	//argv from 1 to 3 should contain capacitys for a, b, and c
-	//argv from 4 to 6 should contain goals for a, b, and c
-	int input = {atoi(argv[1]), atoi(argv[2]), atoi(argv[3]), atoi(argv[4]), atoi(argv[5]), atoi(argv[6])};
+	//argv from 1 to 3 should contain capacitys for a, b, and c (input[0] ~ input[2])
+	//argv from 4 to 6 should contain goals for a, b, and c (input[3] ~ input [5])
+	int input = { atoi(argv[1]), atoi(argv[2]), atoi(argv[3]), atoi(argv[4]),
+			atoi(argv[5]), atoi(argv[6]) };
 
 	//Error check that all inputs are integers
-	for (int i = 0; i <= input.length(); i++){
-		if ((input[i] != int) or input[i] <= 0){
-				cerr << "Error: Invalid capacity '" << input[i] << "' for jug A." << endl;
-			}
+	for (int i = 0; i <= 5; i++) {
+		if ((input[i] != int) or input[i] <= 0) {
+			cerr << "Error: Invalid capacity '" << input[i] << "' for jug A."
+					<< endl;
+		}
 
 		//Check that capacity isnt less than the goal
 		//TODO: This wont work exactly
-		if (input[i] < input[i+2]){
+		if (input[i] < input[i + 2]) {
 			cerr << "Error: Goal cannot exceed capacity of jug A, B, or C."
 		}
 	}
 
 	//Check that sum of goal state is equal to capacity of C
-	if (input[3] < (input[4] + input[5] + input[6])){
-		cerr << "Error: Total gallons in goal state must be equal to the capacity of jug C."
+	if (input[3] < (input[4] + input[5] + input[6])) {
+		cerr
+				<< "Error: Total gallons in goal state must be equal to the capacity of jug C."
 	}
 
 	return 1;
