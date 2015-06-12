@@ -49,7 +49,6 @@ vector<State> findPath(State &child) {
 }
 
 void createAdjacencies(State &curr) {
-	//TODO: Possibly set capacity for visited && fill visited with false
 	int a = curr.a(), b = curr.b(), c = curr.c();
 	//C->A
 	visited[][] = new boolean[cap.a()][cap.b];
@@ -124,20 +123,19 @@ int main(int argc, char * const argv[]) {
 	//Error check that all inputs are integers
 	for (int i = 0; i <= 5; i++) {
 		if ((input[i] != int) or input[i] <= 0) {
-			cerr << "Error: Invalid capacity '" << input[i] << "' for jug A."
-					<< endl;
+			cerr << "Error: Invalid capacity '" << input[i] << "' for jug A." << endl;
 		}
 
 		//Check that capacity isnt less than the goal
 		//TODO: This wont work exactly
 		if (input[i] < input[i + 2]) {
-			cerr << "Error: Goal cannot exceed capacity of jug A, B, or C."
+			cerr << "Error: Goal cannot exceed capacity of jug A, B, or C." << endl;
 		}
 	}
 
-	//Check that sum of goal state is equal to capacity of C
+	//Check that sum of goal input is equal to capacity of C
 	if (input[3] < (input[4] + input[5] + input[6])) {
-		cerr << "Error: Total gallons in goal state must be equal to the capacity of jug C."
+		cerr << "Error: Total gallons in goal state must be equal to the capacity of jug C." << endl;
 	}
 
 	return 1;
